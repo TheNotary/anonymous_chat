@@ -2,17 +2,20 @@
 
 <div id="display"></div>
 
-<form>
+<div>
+  <input id="channel-name" type="hidden" value="/choice"/>
+  <input id="password" type="hidden" value="password"/>
+
   <label>Name:</label>
-  <input type="text"/>
+  <input id="name" type="text"/>
 
   <div>
     <label>Message:</label>
-    <input type="text"/>
+    <input id="message" type="text"/>
 
     <button onclick="sendMessage()">Send Msg</button>
   </div>
-</form>
+</div>
 
 
 

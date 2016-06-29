@@ -1,17 +1,32 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+var client;
+var channelName;
 
 function setupClientForFaye() {
-  var client = new Faye.Client(url, {timeout: 120});
+  var url = "/faye";
+  client = new Faye.Client(url, {timeout: 120});
+
+  channelName = $("#channel-name").val();
+  var pass = $("#password").val();
+
+  var subscription = client.subscribe(channelName, function(msg) {
+    renderNewMessage(msg);
+  });
 }
 
 function sendMessage(){
-
-
+  var speaker = $('#name').val();
+  var message = $('#message').val();
+  client.publish(channelName, {message: message, speaker: speaker });
 }
 
 function renderNewMessage(payload){
+  var markup = "<div>";
 
+  markup += "<span>" + payload.speaker + ": </span>";
+  markup += "<span>" + payload.message + "</span>";
+
+  markup += "</div>";
+  $('#display').html($('#display').html() + markup);
+  // alert(payload.message);
 
 }
